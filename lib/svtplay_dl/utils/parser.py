@@ -162,6 +162,12 @@ def gen_parser(version="unknown"):
         default=False,
         help="only download video if audio and video is seperated",
     )
+    general.add_argument(
+        "--access-token",
+        dest="access_token",
+        default=None,
+        help="An access token to avoid repeated login.",
+    )
 
     quality = parser.add_argument_group("Quality")
     quality.add_argument(
@@ -367,6 +373,7 @@ def setup_defaults():
     options.set("filename", FILENAME)
     options.set("only_audio", False)
     options.set("only_video", False)
+    options.set("access_token", None)
     options.set("output_format", "mp4")
     options.set("get_all_subtitles", False)
     return _special_settings(options)
@@ -424,6 +431,7 @@ def parsertoconfig(config, parser):
     config.set("proxy", parser.proxy)
     config.set("only_audio", parser.only_audio)
     config.set("only_video", parser.only_video)
+    config.set("access_token", parser.access_token)
     config.set("output_format", parser.output_format)
     return _special_settings(config)
 
